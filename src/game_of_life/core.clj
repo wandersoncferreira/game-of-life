@@ -1,8 +1,10 @@
 (ns game-of-life.core)
 
-(defn make-board []
-  {:neighbors 0
-   :cells []})
+(defn make-board
+  ([]
+   {:cells     []})
+  ([cells]
+   {:cells cells}))
 
 (defn make-cell [x y]
   {:x x
@@ -34,8 +36,19 @@
 (defn make-game [board]
   {:board board})
 
-(defn next-iteration [game]
-  game)
+(defn next-iteration [{:keys [board] :as game}]
+  (let [cells (get-in game [:board :cells])]
+    (make-game
+     (make-board
+      (for [c cells]
+        (if (= (count (neighbors board c)) 2)
+          (assoc c :alive? true)
+          (assoc c :alive? false)))))))
 
 (defn is-alive? [board cell]
-  false)
+  (let [{:keys [x y]} cell]
+    (:alive?
+     (first (filter (fn [c]
+                      (and (= (:x c) x)
+                           (= (:y c) y)))
+                    (:cells board))))))
