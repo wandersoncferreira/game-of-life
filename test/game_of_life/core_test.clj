@@ -15,3 +15,11 @@
                [[0 0] [0 1]])]
     (is (= (neighbors board (make-cell 0 0)) [(make-cell 0 1)]))
     (is (= (neighbors board (make-cell 0 1)) [(make-cell 0 0)]))))
+
+(deftest a-two-single-cells-far-from-each-other-should-have-zero-neighbors
+  (let [board (reduce
+               (fn [board [x y]])
+               (make-board)
+               [[0 0] [0 100]])]
+    (is (= (count (neighbors board [0 0])) 0))
+    (is (= (count (neighbors board [0 100])) 0))))
