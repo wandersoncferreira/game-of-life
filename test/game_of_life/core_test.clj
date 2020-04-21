@@ -34,3 +34,10 @@
                 [1 0] [1 1] [1 2]
                 [2 0] [2 1] [2 2]])]
     (is (= 8 (count (neighbors board (make-cell 1 1)))))))
+
+(deftest a-single-cell-should-die-in-next-iteration
+  (let [board (make-board)
+        board (add-cell board (make-cell 0 0))
+        game (make-game board)
+        new-game (next-iteration game)]
+    (is (false? (is-alive? (:board new-game) (make-cell 0 0))))))

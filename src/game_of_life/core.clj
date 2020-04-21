@@ -5,7 +5,9 @@
    :cells []})
 
 (defn make-cell [x y]
-  {:x x :y y})
+  {:x x
+   :y y
+   :alive? true})
 
 (defn- abs [v]
   (if (pos? v) v (* -1 v)))
@@ -19,11 +21,21 @@
          (<= diff-y 1))))
 
 (defn neighbors [board cell]
-  (for [{:keys [x y] :as c} (:cells board)
-        :when (and
-               (not= c cell)
-               (neighbors? [x y] [(:x cell) (:y cell)]))]
-    c))
+  (let [cells-alive (filter (fn [cell] (not (:alive cell))) (:cells board))]
+    (for [{:keys [x y] :as c} cells-alive
+          :when               (and
+                               (not= c cell)
+                               (neighbors? [x y] [(:x cell) (:y cell)]))]
+      c)))
 
 (defn add-cell [board cell]
   (update board :cells conj cell))
+
+(defn make-game [board]
+  {:board board})
+
+(defn next-iteration [game]
+  game)
+
+(defn is-alive? [board cell]
+  false)
