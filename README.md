@@ -1,6 +1,15 @@
 # game-of-life
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure project designed to solve the `Game of Life` kata. 
+[Conway'sGame of
+Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) it is a
+zero-player game, meaning that its evolution is determined by its
+initial state, requiring no further input. The universe of Game of
+Life is an infinite, two-dimensional orthogonal grid of square cells,
+each of which is in one of two possible states: dead or alive.
+
+Every cell interacts with its eight neighbors, which are the cells
+that are horizontally, vertically, or diagonally adjacent.
 
 ## Rules
 
@@ -11,7 +20,9 @@ Four simple rules to control the behavior of Game of Life.
     3. Any live cell with more than three live neighbours dies, as if by overcrowding
     4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
 
+## Implementations
 
+1. 2020/04/11 - first attempt
 
 ## License
 
