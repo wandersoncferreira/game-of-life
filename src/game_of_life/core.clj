@@ -40,8 +40,11 @@
   (let [cells (get-in game [:board :cells])]
     (make-game
      (make-board
-      (for [c cells]
-        (if (= (count (neighbors board c)) 2)
+      (for [c cells
+            :let [neigh (neighbors board c)
+                  n (count neigh)]]
+        (if (or (= n 2)
+                (= n 3))
           (assoc c :alive? true)
           (assoc c :alive? false)))))))
 
