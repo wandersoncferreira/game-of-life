@@ -80,3 +80,13 @@
                       (and (= (:x c) x)
                            (= (:y c) y)))
                     (:cells board))))))
+
+(defn print-game-of-life [game size]
+  (letfn [(print-alive [[x y]]
+            (if (is-alive? game (make-cell x y))
+              (print "X")
+              (print " ")))
+          (print-game! [i]
+            (run! print-alive (map #(vector i %) (range (* -1 size) size)))
+            (println " "))]
+    (run! print-game! (range (* -1 size) size))))
