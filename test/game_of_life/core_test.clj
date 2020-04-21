@@ -4,5 +4,14 @@
 
 (deftest a-single-cell-should-have-zero-neighbors
   (let [board (make-board)
-        cell (make-cell)]
-    (is (= (:neighbors (add-cell board cell)) 0))))
+        cell (make-cell 0 0)]
+    (is (= (count (neighbors board (add-cell board cell))) 0))))
+
+(deftest two-cells-next-to-each-other-should-be-neighbors
+  (let [board (reduce
+               (fn [board [x y]]
+                 (add-cell board (make-cell x y)))
+               (make-board)
+               [[0 0] [0 1]])]
+    (is (= (neighbors board (make-cell 0 0)) [(make-cell 0 1)]))
+    (is (= (neighbors board (make-cell 0 1)) [(make-cell 0 0)]))))
