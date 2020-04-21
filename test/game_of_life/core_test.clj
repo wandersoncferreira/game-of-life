@@ -18,8 +18,9 @@
 
 (deftest a-two-single-cells-far-from-each-other-should-have-zero-neighbors
   (let [board (reduce
-               (fn [board [x y]])
+               (fn [board [x y]]
+                 (add-cell board (make-cell x y)))
                (make-board)
                [[0 0] [0 100]])]
-    (is (= (count (neighbors board [0 0])) 0))
-    (is (= (count (neighbors board [0 100])) 0))))
+    (is (= (count (neighbors board (make-cell 0 0))) 0))
+    (is (= (count (neighbors board (make-cell 0 100))) 0))))
