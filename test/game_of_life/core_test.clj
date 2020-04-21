@@ -61,3 +61,15 @@
         game (make-game board)
         new-game (next-iteration game)]
     (is (true? (is-alive? (:board new-game) (make-cell 1 1))))))
+
+(deftest a-cell-with-more-than-three-neighbors-should-die-in-next-iteration
+  (let [board (reduce
+               (fn [board [x y]]
+                 (add-cell board (make-cell x y)))
+               (make-board)
+               [[0 0] [0 1] [0 2]
+                [1 0] [1 1] [1 2]
+                [2 0] [2 1] [2 2]])
+        game (make-game board)
+        new-game (next-iteration game)]
+    (is (false? (is-alive? (:board new-game) (make-cell 1 1))))))
